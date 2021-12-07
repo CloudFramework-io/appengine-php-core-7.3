@@ -36,7 +36,7 @@ if($core->config->get('core.erp.platform_id') && !$core->config->get('core.erp.u
         exit;
     }
     $core->config->set($config_erp_user_tag,$user);
-    $core->logs->add("'{$config_erp_user_tag}' config var assigned for ERP user to [{$user}]",'CloudFrameWork.ERP');
+    $core->logs->add("'{$config_erp_user_tag}' config var calculated dynamically for ERP user to [{$user}]",'CloudFrameWork.ERP');
 
 }
 //endregion
