@@ -106,7 +106,7 @@ if (!defined("_CLOUDFRAMEWORK_CORE_CLASSES_")) {
     final class Core7
     {
         // Version of the Core7 CloudFrameWork
-        var $_version = 'v73.24062';
+        var $_version = 'v73.24091';
         /** @var CorePerformance $__p */
         var  $__p;
         /** @var CoreIs $is */
@@ -5264,7 +5264,9 @@ if (!defined("_CLOUDFRAMEWORK_CORE_CLASSES_")) {
                     if(isset($this->models[$object]['data']['entity'])) $entity = $this->models[$object]['data']['entity'];
                     //endregion
 
-                    $options = ['projectId'=>(isset($this->models[$object]['data']['interface']['project_id']) && $this->models[$object]['data']['interface']['project_id'])?$this->models[$object]['data']['interface']['project_id']: $this->core->gc_project_id];
+                    $project_id = $this->core->config->get('core.gcp.datastore.project_id') ?? $this->core->gc_project_id;
+                    $project_id = $this->models[$object]['data']['interface']['project_id'] ?? $project_id;
+                    $options = ['projectId'=>$project_id];
                     if(isset($this->models[$object]['data']['interface']['secret']) && $this->models[$object]['data']['interface']['secret']) $options['keyFile'] = $this->models[$object]['data']['interface']['secret'];
                     if(isset($this->models[$object]['data']['interface']['namespace']) && $this->models[$object]['data']['interface']['namespace']) $options['namespace'] = $this->models[$object]['data']['interface']['namespace'];
                     if(!is_object($object_ds = $this->core->loadClass('DataStore',[$entity,$namespace,$this->models[$object]['data'],$options]))) return;
